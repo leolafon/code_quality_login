@@ -27,7 +27,6 @@ public class ChainedList {
 		this.count++;
 		for(int i = 0; i < this.count; i++) {
 			this.first.count++;
-			System.out.println(this.first.name);
 			this.first = this.first.next;
 		}
 		Link newOne = new Link(name, this.count, this.last, this.first);
