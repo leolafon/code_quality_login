@@ -1,0 +1,8 @@
+build/*
+out/*
+build/*
+bin/*
+.idea
+.gradle
+!gradle-wrapper.jar
+*.jar
