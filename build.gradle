@@ -7,6 +7,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'checkstyle'
+apply plugin: 'jacoco'
 
 sourceCompatibility = 1.8
 
@@ -31,6 +32,16 @@ jacocoTestReport {
     }
 }
 
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.7
+            }
+        }
+    }
+}
+
 tasks.coveralls {
     dependsOn 'check'
 }
@@ -40,4 +51,6 @@ test {
         exceptionFormat = 'full'
     }
 }
+
+check.dependsOn jacocoTestCoverageVerification
 
