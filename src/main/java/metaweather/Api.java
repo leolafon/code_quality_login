@@ -19,6 +19,10 @@ public class Api {
 
     protected Api() {}
 
+    /**
+     *
+     * @return
+     */
     public static Api getInstance() {
         if (instance == null) {
             instance = new Api();
@@ -26,6 +30,11 @@ public class Api {
         return instance;
     }
 
+    /**
+     *
+     * @param location
+     * @return
+     */
     public static JSONObject locationSearch(String location) {
         if (location == null) {
             return null;
@@ -48,6 +57,12 @@ public class Api {
         }
     }
 
+    /**
+     *
+     * @param location
+     * @return
+     * @throws Exception
+     */
     public static JSONObject getWeatherByLocation(String location)
         throws Exception {
         JSONObject locationData = locationSearch(location);
@@ -63,7 +78,7 @@ public class Api {
             return getJsonResponse(connection);
         } catch(Exception e) {
             e.printStackTrace();
-            throw new Exception("yolo");
+            return null;
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -71,6 +86,12 @@ public class Api {
         }
     }
 
+    /**
+     *
+     * @param key
+     * @param value
+     * @return
+     */
     private static String buildQueryString(String key, String value) {
         try {
             String url = "?" + key + "="
@@ -83,6 +104,13 @@ public class Api {
         }
     }
 
+    /**
+     *
+     * @param urlString
+     * @return
+     * @throws MalformedURLException
+     * @throws IOException
+     */
     private static HttpURLConnection connectToUrl(String urlString)
         throws MalformedURLException, IOException {
         URL url = new URL(urlString);
@@ -94,7 +122,41 @@ public class Api {
         return connection;
     }
 
+    /**
+     *
+     * @param connection
+     * @return
+     * @throws IOException
+     */
     private static JSONObject getJsonResponse(HttpURLConnection connection)
+        throws IOException {
+        StringBuffer response = getResponse(connection);
+        JSONObject json = new JSONObject(response.toString());
+
+        return json;
+    }
+
+    /**
+     *
+     * @param connection
+     * @return
+     * @throws IOException
+     */
+    private static JSONObject getJsonResponseArray(HttpURLConnection connection)
+            throws IOException {
+        StringBuffer response = getResponse(connection);
+        JSONObject json = new JSONArray(response.toString()).getJSONObject(0);
+
+        return json;
+    }
+
+    /**
+     *
+     * @param connection
+     * @return
+     * @throws IOException
+     */
+    private static StringBuffer getResponse(HttpURLConnection connection)
         throws IOException {
         InputStream is = connection.getInputStream();
         BufferedReader rd = new BufferedReader(new InputStreamReader(is));
@@ -105,23 +167,8 @@ public class Api {
             response.append("\r");
         }
         rd.close();
-        JSONObject json = new JSONObject(response.toString());
-        return json;
-    }
 
-    private static JSONObject getJsonResponseArray(HttpURLConnection connection)
-            throws IOException {
-        InputStream is = connection.getInputStream();
-        BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-        StringBuffer response = new StringBuffer();
-        String line;
-        while ((line = rd.readLine()) != null) {
-            response.append(line);
-            response.append("\r");
-        }
-        rd.close();
-        JSONObject json = new JSONArray(response.toString()).getJSONObject(0);
-        return json;
+        return response;
     }
 
 }
