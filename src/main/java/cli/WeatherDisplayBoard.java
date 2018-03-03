@@ -49,29 +49,43 @@ public class WeatherDisplayBoard {
         System.out.println(border);
     }
 
-    public void drawCell(String cellText) {
-        String cellContent = "| ";
-        cellContent += cellText;
+    public String addMarginToString(String target, int margin) {
+        String marginSpaces = "";
+        StringBuilder builder = new StringBuilder();
+        String margedResult = new String();
+
+        for (int i = 0; i < margin; i++)
+        {
+            marginSpaces += " ";
+        }
+        margedResult = marginSpaces + target + marginSpaces;
+        return margedResult;
+    }
+
+    public void drawCell(String cellText, int idealWidth) {
+        int margin = (idealWidth - cellText.length()) / 2 ;
+        String cellContent = "|";
+        cellContent += this.addMarginToString(cellText, margin);
         cellContent += " |";
         System.out.println(cellContent);
     }
 
     public void drawDayCells() {
+        String title = "MetaWeather";
+
         drawBorder();
-        drawCell("MetaWeather");
+        drawCell(title, title.length());
         for (int i = 0; i < this.nbOfBlocks; i++)
-            drawCell("J + " + i);
+            drawCell("J + " + i, this.weatherBlockArray[i].getLenghtOfData());
         drawBorder();
     }
 
-    public void drawForecastInformations()
-    {
+    public void drawForecastInformations() {
         for (int i = 0; i < this.weatherBlockArray.length; i++)
-            drawCell(this.weatherBlockArray[i].getWeatherDataAsString());
+            drawCell(this.weatherBlockArray[i].getWeatherDataAsString(), this.weatherBlockArray[i].getLenghtOfData());
         drawBorder();
     }
-    public void displayWeather()
-    {
+    public void displayWeather() {
         drawDayCells();
         drawForecastInformations();
     }
