@@ -63,8 +63,7 @@ public class Api {
      * @return
      * @throws Exception
      */
-    public static JSONObject getWeatherByLocation(String location)
-        throws Exception {
+    public static JSONObject getWeatherByLocation(String location) {
         JSONObject locationData = locationSearch(location);
         if (locationData == null) {
             return null;
