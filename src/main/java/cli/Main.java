@@ -4,20 +4,21 @@ public class Main {
     public static void main(String[] args) {
 
         if (args.length == 0) {
-            System.out.println("Usage: City -j nombreJours");
+            System.out.println("Usage: City -j nbDays");
             return;
         }
 
-        int j = 0;
+        int nbDays = 0;
         String  city = args[0];
         if (args.length > 2 && args[1].equals("-j")) {
-            j = Integer.parseInt(args[2]);
-            if (j > 5) {
-                j = 5;
+            nbDays = Integer.parseInt(args[2]);
+            if (nbDays > 5) {
+                nbDays = 5;
             }
         }
 
-        System.out.println("Ville : " + city + ", nb jours : " + j);
+        Cli params = new Cli(city, nbDays);
 
+        System.out.println("City : " + params.getCity() + ", number of days : " + params.getNbDays());
     }
 }
