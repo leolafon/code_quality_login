@@ -1,3 +1,6 @@
 # code_quality_login
 
-L’objectif  de ce projet est de réaliser un client météo en ligne de commande. Il permet de récupérer automatiquement depuis le web les prévisions météo d’une zone spécifiée et de les afficher dans la console.
+This project aims to create a command line based weather client. It allows to automatically query the weather predictions from a specified zone, and display it in the console output. Maximum days of predictions is 5.
+
+Command line usage:
+java -jar Weather_CLI-1.0-SNAPSHOT.jar city -j nbDays
