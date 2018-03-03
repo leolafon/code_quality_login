@@ -60,5 +60,13 @@ jar {
     }
 }
 
-check.dependsOn jacocoTestCoverageVerification
+task standaloneJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'cli.Main'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
 
+check.dependsOn jacocoTestCoverageVerification
