@@ -20,8 +20,8 @@ public class Cli {
         {
             JSONArray Forecasts = consolidateWeather.getJSONArray("consolidated_weather");
             this.displayBoard = new WeatherDisplayBoard(this.city, Forecasts);
+            this.displayBoard.displayWeather();
         }
-
     }
 
     public String getCity() {

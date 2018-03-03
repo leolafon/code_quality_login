@@ -17,6 +17,7 @@ public class WeatherDisplayBoard {
         this.daysForecastArray = daysForecastArray;
         this.nbOfBlocks = daysForecastArray.length();
         setupBlockArrayFromData();
+        calculateWidthOfDisplay();
     }
 
     private void setupBlockArrayFromData()
@@ -27,7 +28,6 @@ public class WeatherDisplayBoard {
             for (int i = 0; i < this.daysForecastArray.length(); i++)
             {
                 this.weatherBlockArray[i] = new WeatherBlockBoard(this.daysForecastArray.getJSONObject(i));
-
             }
         }
     }
@@ -67,7 +67,7 @@ public class WeatherDisplayBoard {
         String cellContent = "|";
         cellContent += this.addMarginToString(cellText, margin);
         cellContent += " |";
-        System.out.println(cellContent);
+        System.out.print(cellContent);
     }
 
     public void drawDayCells() {
@@ -75,8 +75,10 @@ public class WeatherDisplayBoard {
 
         drawBorder();
         drawCell(title, title.length());
+        System.out.println("");
         for (int i = 0; i < this.nbOfBlocks; i++)
             drawCell("J + " + i, this.weatherBlockArray[i].getLenghtOfData());
+        System.out.println("");
         drawBorder();
     }
 
