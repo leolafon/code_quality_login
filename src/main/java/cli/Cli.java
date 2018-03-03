@@ -1,7 +1,6 @@
 package cli;
 
-import MetaWeather.Api;
-import jdk.nashorn.internal.parser.JSONParser;
+import metaweather.Api;
 
 public class Cli {
     private String  city = "";

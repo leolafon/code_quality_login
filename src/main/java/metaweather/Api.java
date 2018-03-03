@@ -1,4 +1,4 @@
-package MetaWeather;
+package metaweather;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
