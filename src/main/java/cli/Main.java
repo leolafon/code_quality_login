@@ -1,6 +1,10 @@
 package cli;
 
 public class Main {
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
         if (args.length == 0) {
@@ -19,6 +23,8 @@ public class Main {
 
         Cli params = new Cli(city, nbDays);
 
-        System.out.println("City : " + params.getCity() + ", number of days : " + params.getNbDays());
+        System.out.println(
+                "City : " + params.getCity() + ", number of days : " + params.getNbDays()
+        );
     }
 }

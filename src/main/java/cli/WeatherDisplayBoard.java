@@ -4,7 +4,7 @@ import org.json.JSONArray;
 
 public class WeatherDisplayBoard {
     private int nbOfBlocks = 0;
-    private String cityTitle = "MetaWeather";
+    private String cityTitle = "metaweather";
     private int widthOfDisplay = 0;
     JSONArray daysForecastArray = null;
     WeatherBlockBoard weatherBlockArray[] = null;
@@ -49,13 +49,44 @@ public class WeatherDisplayBoard {
         System.out.println(border);
     }
 
-    public void drawCell(String cellText) {
-        String cellContent = "| ";
-        cellContent += cellText;
-        cellContent += " |";
+    public String addMarginToString(String target, int margin) {
+        String marginSpaces = "";
+        StringBuilder builder = new StringBuilder();
+        String margedResult = new String();
+
+        for (int i = 0; i < margin; i++)
+        {
+            marginSpaces += " ";
+        }
+        margedResult = marginSpaces + target + marginSpaces;
+        return margedResult;
     }
 
-    public void displayWeather()
-    {
+    public void drawCell(String cellText, int idealWidth) {
+        int margin = (idealWidth - cellText.length()) / 2 ;
+        String cellContent = "|";
+        cellContent += this.addMarginToString(cellText, margin);
+        cellContent += " |";
+        System.out.println(cellContent);
+    }
+
+    public void drawDayCells() {
+        String title = "MetaWeather";
+
+        drawBorder();
+        drawCell(title, title.length());
+        for (int i = 0; i < this.nbOfBlocks; i++)
+            drawCell("J + " + i, this.weatherBlockArray[i].getLenghtOfData());
+        drawBorder();
+    }
+
+    public void drawForecastInformations() {
+        for (int i = 0; i < this.weatherBlockArray.length; i++)
+            drawCell(this.weatherBlockArray[i].getWeatherDataAsString(), this.weatherBlockArray[i].getLenghtOfData());
+        drawBorder();
+    }
+    public void displayWeather() {
+        drawDayCells();
+        drawForecastInformations();
     }
 }
