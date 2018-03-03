@@ -34,3 +34,10 @@ jacocoTestReport {
 tasks.coveralls {
     dependsOn 'check'
 }
+
+test {
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
