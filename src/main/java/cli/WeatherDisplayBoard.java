@@ -4,7 +4,7 @@ import org.json.JSONArray;
 
 public class WeatherDisplayBoard {
     private int nbOfBlocks = 0;
-    private String cityTitle = "MetaWeather";
+    private String cityTitle = "metaweather";
     private int widthOfDisplay = 0;
     JSONArray daysForecastArray = null;
     WeatherBlockBoard weatherBlockArray[] = null;
