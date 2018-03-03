@@ -53,9 +53,26 @@ public class WeatherDisplayBoard {
         String cellContent = "| ";
         cellContent += cellText;
         cellContent += " |";
+        System.out.println(cellContent);
     }
 
+    public void drawDayCells() {
+        drawBorder();
+        drawCell("MetaWeather");
+        for (int i = 0; i < this.nbOfBlocks; i++)
+            drawCell("J + " + i);
+        drawBorder();
+    }
+
+    public void drawForecastInformations()
+    {
+        for (int i = 0; i < this.weatherBlockArray.length; i++)
+            drawCell(this.weatherBlockArray[i].getWeatherDataAsString());
+        drawBorder();
+    }
     public void displayWeather()
     {
+        drawDayCells();
+        drawForecastInformations();
     }
 }
