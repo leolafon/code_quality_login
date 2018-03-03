@@ -4,18 +4,20 @@ import org.json.JSONArray;
 
 public class WeatherDisplayBoard {
     private int nbOfBlocks = 0;
+    private int nbOfDays;
     private String cityTitle = "metaweather";
     private int widthOfDisplay = 0;
     JSONArray daysForecastArray = null;
     WeatherBlockBoard weatherBlockArray[] = null;
 
-    public WeatherDisplayBoard(String location, JSONArray daysForecastArray)
+    public WeatherDisplayBoard(String location, JSONArray daysForecastArray, int nbOfDays)
     {
         this.cityTitle = location;
         if (daysForecastArray == null)
             return;
         this.daysForecastArray = daysForecastArray;
         this.nbOfBlocks = daysForecastArray.length();
+        this.nbOfDays = nbOfDays;
         setupBlockArrayFromData();
         calculateWidthOfDisplay();
     }
@@ -25,17 +27,16 @@ public class WeatherDisplayBoard {
         if (this.daysForecastArray != null && this.nbOfBlocks > 0)
         {
             this.weatherBlockArray = new WeatherBlockBoard[this.nbOfBlocks];
-            for (int i = 0; i < this.daysForecastArray.length(); i++)
+            for (int i = 0; i < this.daysForecastArray.length() && i < this.nbOfDays; i++)
             {
                 this.weatherBlockArray[i] = new WeatherBlockBoard(this.daysForecastArray.getJSONObject(i));
             }
         }
     }
 
-    private void calculateWidthOfDisplay()
-    {
+    private void calculateWidthOfDisplay() {
         this.widthOfDisplay = 0;
-        for (int i = 0; i < this.daysForecastArray.length(); i++)
+        for (int i = 0; i < this.daysForecastArray.length() && i < this.nbOfDays; i++)
         {
             this.widthOfDisplay += this.weatherBlockArray[i].getLenghtOfData() + 2;
         }
@@ -75,20 +76,22 @@ public class WeatherDisplayBoard {
 
         drawBorder();
         drawCell(title, title.length());
-        System.out.println("");
-        for (int i = 0; i < this.nbOfBlocks; i++)
-            drawCell("J + " + i, this.weatherBlockArray[i].getLenghtOfData());
-        System.out.println("");
+        for (int i = 0; i < this.nbOfBlocks && i < this.nbOfDays; i++) {
+            drawCell("J + " + i, this.weatherBlockArray[i].getLenghtOfData() + 2);
+        }
+        System.out.println();
         drawBorder();
     }
 
-    public void drawForecastInformations() {
-        for (int i = 0; i < this.weatherBlockArray.length; i++)
+    public void drawForecastInformation() {
+        for (int i = 0; i < this.weatherBlockArray.length && i < this.nbOfDays; i++) {
             drawCell(this.weatherBlockArray[i].getWeatherDataAsString(), this.weatherBlockArray[i].getLenghtOfData());
+        }
+        System.out.println();
         drawBorder();
     }
     public void displayWeather() {
         drawDayCells();
-        drawForecastInformations();
+        drawForecastInformation();
     }
 }

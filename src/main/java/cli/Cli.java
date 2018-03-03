@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 public class Cli {
     private String  city = "";
-    private int     nbDays = 0;
+    private int     nbDays = 5;
     private Api     weatherApi = Api.getInstance();
     private JSONObject location;
     private WeatherDisplayBoard displayBoard = null;
@@ -19,7 +19,7 @@ public class Cli {
         if (consolidateWeather != null)
         {
             JSONArray Forecasts = consolidateWeather.getJSONArray("consolidated_weather");
-            this.displayBoard = new WeatherDisplayBoard(this.city, Forecasts);
+            this.displayBoard = new WeatherDisplayBoard(this.city, Forecasts, this.nbDays);
             this.displayBoard.displayWeather();
         }
     }

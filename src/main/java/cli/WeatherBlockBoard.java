@@ -4,11 +4,11 @@ import org.json.JSONObject;
 
 public class WeatherBlockBoard {
     private JSONObject  weatherData;
-    private int minTemp = 0;
-    private int maxTemp = 0;
-    private int humidity = 0;
-    private int windSpeed = 0;
-    private String forecastInfos = "";
+    public int minTemp = 0;
+    public int maxTemp = 0;
+    public int humidity = 0;
+    public int windSpeed = 0;
+    public String forecastInfos = "";
 
     public WeatherBlockBoard(JSONObject weatherData)
     {
@@ -28,6 +28,7 @@ public class WeatherBlockBoard {
             this.humidity = this.weatherData.getInt("humidity");
         if (this.weatherData.get("wind_speed") != null)
             this.windSpeed = this.weatherData.getInt("wind_speed");
+        this.forecastInfos = this.minTemp + " " + this.maxTemp + " " + this.windSpeed + " " + this.humidity;
     }
 
     public String getWeatherDataAsString()
