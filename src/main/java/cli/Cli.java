@@ -11,8 +11,6 @@ public class Cli {
     Cli(String city, int nbDays) {
         this.city = city;
         this.nbDays = nbDays;
-        String location = weatherApi.locationSearch(this.city);
-        System.out.println(location);
     }
 
     public String getCity() {
